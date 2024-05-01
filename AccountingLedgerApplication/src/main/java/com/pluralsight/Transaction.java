@@ -1,17 +1,19 @@
 package com.pluralsight;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class Transaction {
     public static final String FILENAME = "Files/transactionHistory.csv";
 
-    public String date;
-    public String time;
-    public String description;
-    public String vendor;
-    public double amount;
+    private String date;
+    private String time;
+    private String description;
+    private String vendor;
+    private double amount;
 
     public Transaction(String date, String time, String description, String vendor, double amount) {
         this.date = date;
@@ -19,6 +21,24 @@ public class Transaction {
         this.description = description;
         this.vendor = vendor;
         this.amount = amount;
+    }
+
+    public void writeToTransactionFile() {
+        try {
+            createFileIfNotExists();
+            String data = String.format("%s|%s|%s|%s|%.2f%n", date, time, description, vendor, amount);
+            Files.write(Paths.get(FILENAME), data.getBytes(), StandardOpenOption.APPEND);
+            System.out.println("Transaction added successfully.");
+        } catch (IOException e) {
+            System.out.println("Error occurred while writing to file: " + e.getMessage());
+        }
+    }
+
+    private void createFileIfNotExists() throws IOException {
+        Path path = Paths.get(FILENAME);
+        if (!Files.exists(path)) {
+            Files.createFile(path);
+        }
     }
 
     public String getDate() {
@@ -40,26 +60,4 @@ public class Transaction {
     public double getAmount() {
         return amount;
     }
-
-    public static void addDeposit(String date, String time, String description, String vendor, double amount) {
-        String transaction = String.format("%s|%s|%s|%s|$%.2f", date, time, description, vendor, amount);
-        writeTransactionToFile(transaction);
-    }
-
-    public static void makePayment(String date, String time, String description, String vendor, double amount) {
-        String transaction = String.format("%s|%s|%s|%s|-$%.2f", date, time, description, vendor, amount);
-        writeTransactionToFile(transaction);
-    }
-
-    public static void writeTransactionToFile(String transaction) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILENAME, true))) {
-            writer.println(transaction);
-            System.out.println("Transaction added successfully.");
-        } catch (IOException e) {
-            System.out.println("Error occurred while writing to file.");
-
-        }
-    }
-
-
 }

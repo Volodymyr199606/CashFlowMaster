@@ -1,4 +1,5 @@
 package com.pluralsight;
+
 import java.util.Scanner;
 
 public class Main {
@@ -22,10 +23,10 @@ public class Main {
 
             switch (choice.toUpperCase()) {
                 case "D":
-                    addDeposit(scanner);
+                    addDeposit(scanner, ledger);
                     break;
                 case "P":
-                    makePayment(scanner);
+                    makePayment(scanner, ledger);
                     break;
                 case "L":
                     ledger.displayLedger();
@@ -42,7 +43,7 @@ public class Main {
         }
     }
 
-    public static void addDeposit(Scanner scanner) {
+    public static void addDeposit(Scanner scanner, Ledger ledger) {
         System.out.println("Enter deposit information:");
         System.out.print("Date (yyyy-mm-dd): ");
         String date = scanner.nextLine();
@@ -55,19 +56,26 @@ public class Main {
         System.out.print("Amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
 
-        Transaction.addDeposit(date, time, description, vendor, amount);
-        System.out.println("Deposit added successfully. Amount: $"+ amount);
+        Transaction deposit = new Transaction(date, time, description, vendor, amount);
+        deposit.writeToTransactionFile();
+        ledger.addTransaction(deposit);
     }
 
-    
+    public static void makePayment(Scanner scanner, Ledger ledger) {
+        System.out.println("Enter payment information:");
+        System.out.print("Date (yyyy-mm-dd): ");
+        String date = scanner.nextLine();
+        System.out.print("Time (hh:mm): ");
+        String time = scanner.nextLine();
+        System.out.print("Description: ");
+        String description = scanner.nextLine();
+        System.out.print("Vendor: ");
+        String vendor = scanner.nextLine();
+        System.out.print("Amount: ");
+        double amount = Double.parseDouble(scanner.nextLine());
+
+        Transaction payment = new Transaction(date, time, description, vendor, -amount); // Negative amount for payments
+        payment.writeToTransactionFile();
+        ledger.addTransaction(payment);
+    }
 }
-
-
-
-
-
-
-
-
-
-
