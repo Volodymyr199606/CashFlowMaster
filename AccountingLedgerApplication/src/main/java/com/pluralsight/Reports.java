@@ -13,15 +13,18 @@ public class Reports {
     public void runReportMenu(Scanner scanner) {
         while (true) {
             System.out.println();
-            System.out.println("REPORTS SCREEN");
-            System.out.println("1 - Month to Date");
-            System.out.println("2 - Previous Month");
-            System.out.println("3 - Year To Date");
-            System.out.println("4 - Previous Year");
-            System.out.println("5 - Search by Vendor");
-            System.out.println("0 - Back");
-            System.out.println("H - Home");
-            System.out.print("Choose option: ");
+            System.out.printf("%88s%n", "REPORTS SCREEN");
+            System.out.println("┌───────────────────────┐");
+            System.out.println("│ 1 - Month to Date     │");
+            System.out.println("│ 2 - Previous Month    │");
+            System.out.println("│ 3 - Year To Date      │");
+            System.out.println("│ 4 - Previous Year     │");
+            System.out.println("│ 5 - Search by Vendor  │");
+            System.out.println("│ 0 - Back              │");
+            System.out.println("│ H - Home              │");
+            System.out.println("└───────────────────────┘");
+            System.out.print("Pick from options: ");
+
 
             String choice = scanner.nextLine();
 
@@ -61,6 +64,7 @@ public class Reports {
         String startDate = String.format("%04d-%02d-01", year, month);
         String endDate = String.format("%04d-%02d-%02d", year, month, day);
 
+        System.out.println();
         System.out.println("Month to Date Report:");
         displayReport(startDate, endDate);
     }

@@ -10,14 +10,16 @@ public class Main {
 
         while (true) {
             System.out.println();
-            System.out.println("WELCOME TO THE HOME SCREEN");
+            System.out.printf("%95s%n", "WELCOME TO THE HOME SCREEN");
             System.out.println();
-            System.out.println("D - Add deposit");
-            System.out.println("P - Make payment ");
-            System.out.println("L - Ledger");
-            System.out.println("R - Reports");
-            System.out.println("X - Exit");
-            System.out.print("Choose option: ");
+            System.out.println("┌───────────────────────────┐");
+            System.out.println("| D - Add deposit           |");
+            System.out.println("| P - Make payment          |");
+            System.out.println("| L - Ledger                |");
+            System.out.println("| R - Reports               |");
+            System.out.println("| X - Exit                  |");
+            System.out.println("└───────────────────────────┘");
+            System.out.print("Pick option: ");
 
             String choice = scanner.nextLine();
 
@@ -29,11 +31,13 @@ public class Main {
                     makePayment(scanner, ledger);
                     break;
                 case "L":
-                    System.out.println("Select option:");
-                    System.out.println("A - All");
-                    System.out.println("D - Deposits");
-                    System.out.println("P - Payments");
-                    System.out.print("Choose option: ");
+                    System.out.println("┌──────────────┐ ");
+                    System.out.println("│ A - All      │ ");
+                    System.out.println("│ D - Deposits │ ");
+                    System.out.println("│ P - Payments │ ");
+                    System.out.println("└──────────────┘ ");
+                    System.out.print("Make a selection: ");
+
                     String ledgerOption = scanner.nextLine();
                     ledger.displayLedger(ledgerOption);
                     break;

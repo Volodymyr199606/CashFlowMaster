@@ -25,16 +25,18 @@ public class Ledger {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                String date = parts[0];
-                String time = parts[1];
-                String description = parts[2];
-                String vendor = parts[3];
-                double amount = Double.parseDouble(parts[4]);
-                transactions.add(new Transaction(date, time, description, vendor, amount));
+                if (parts.length >= 5) { // Check if the array has at least 5 elements
+                    String date = parts[0];
+                    String time = parts[1];
+                    String description = parts[2];
+                    String vendor = parts[3];
+                    double amount = Double.parseDouble(parts[4]);
+                    transactions.add(new Transaction(date, time, description, vendor, amount));
+                }
             }
             reader.close();
             sortTransactions();
-        } catch (IOException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IOException | NumberFormatException e) {
             System.out.println("Error occurred while reading from file: " + e.getMessage());
         }
     }
@@ -56,8 +58,9 @@ public class Ledger {
 
     public void displayLedger(String option) {
         System.out.println("Ledger Screen");
-        System.out.printf("%-11s%-8s%-24s%-18s%-10s%n", "Date", "Time", "Description", "Vendor", "Amount");
-        System.out.println("-----------------------------------------------------------");
+        System.out.println("┌──────────┬──────┬─────────────────────────────────────────┬────────────────┬─────────┐  ");
+        System.out.println("│   Date   │ Time │    Description                          │      Vendor    │  Amount |  ");
+        System.out.println("├──────────┼──────┼─────────────────────────────────────────┼────────────────┼─────────┤  ");
 
         ArrayList<Transaction> displayTransactions = new ArrayList<>();
 
@@ -86,18 +89,30 @@ public class Ledger {
 
         Collections.sort(displayTransactions, Comparator.comparing(Transaction::getDate).reversed());
 
+        // Calculate column widths dynamically
+        int[] columnWidths = new int[]{10, 6, 20, 16, 9}; // Initial widths
+        for (Transaction transaction : displayTransactions) {
+            columnWidths[0] = Math.max(columnWidths[0], transaction.getDate().length());
+            columnWidths[1] = Math.max(columnWidths[1], transaction.getTime().length());
+            columnWidths[2] = Math.max(columnWidths[2], transaction.getDescription().length());
+            columnWidths[3] = Math.max(columnWidths[3], transaction.getVendor().length());
+            String amountString = String.format("%.2f", Math.abs(transaction.getAmount()));
+            columnWidths[4] = Math.max(columnWidths[4], amountString.length() + 3); // Add 3 for dollar sign and decimals
+        }
+
+        // Print each transaction with aligned columns
         for (Transaction transaction : displayTransactions) {
             String amountString = transaction.getAmount() >= 0 ?
                     String.format("$%.2f", transaction.getAmount()) :
                     String.format("-$%.2f", Math.abs(transaction.getAmount())); // Add dollar sign and handle negative amounts
 
-            System.out.printf("%-11s%-8s%-24s%-18s%-10s%n",
+            System.out.printf("│%-"+columnWidths[0]+"s│%-"+columnWidths[1]+"s│%-"+columnWidths[2]+"s│%-"+columnWidths[3]+"s│%-"+columnWidths[4]+"s│%n",
                     transaction.getDate(), transaction.getTime(),
                     transaction.getDescription(), transaction.getVendor(),
                     amountString);
         }
+        System.out.println("└──────────┴──────┴─────────────────────────────────────────┴────────────────┴─────────┘");
     }
-
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
         sortTransactions();
