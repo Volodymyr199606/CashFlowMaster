@@ -79,6 +79,7 @@ public class Reports {
         String endDate = String.format("%04d-%02d-%02d", year, month, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 
         System.out.println("Previous Month Report:");
+        System.out.println();
         displayReport(startDate, endDate);
     }
 
@@ -92,6 +93,7 @@ public class Reports {
         String endDate = String.format("%04d-%02d-%02d", year, month, day);
 
         System.out.println("Year to Date Report:");
+        System.out.println();
         displayReport(startDate, endDate);
     }
 
@@ -104,13 +106,18 @@ public class Reports {
         String endDate = String.format("%04d-12-31", year);
 
         System.out.println("Previous Year Report:");
+        System.out.println();
         displayReport(startDate, endDate);
     }
 
     private void displayReport(String startDate, String endDate) {
+        System.out.printf("%-12s%-8s%-20s%-15s%-10s%n",
+                "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("──────────────┬──────┬────────────────────┬───────────────┬──────────");
+
         for (Transaction transaction : ledger.getTransactions()) {
             if (transaction.getDate().compareTo(startDate) >= 0 && transaction.getDate().compareTo(endDate) <= 0) {
-                System.out.printf("%-10s%-8s%-20s%-12s%.2f%n",
+                System.out.printf("%-12s%-8s%-20s%-15s%.2f%n",
                         transaction.getDate(), transaction.getTime(),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
