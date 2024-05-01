@@ -10,10 +10,10 @@ public class Main {
 
         while (true) {
             System.out.println();
-            System.out.println("HOME SCREEN");
+            System.out.println("WELCOME TO THE HOME SCREEN");
             System.out.println();
             System.out.println("D - Add deposit");
-            System.out.println("P - Make payment (Debit)");
+            System.out.println("P - Make payment ");
             System.out.println("L - Ledger");
             System.out.println("R - Reports");
             System.out.println("X - Exit");
@@ -29,7 +29,13 @@ public class Main {
                     makePayment(scanner, ledger);
                     break;
                 case "L":
-                    ledger.displayLedger();
+                    System.out.println("Select option:");
+                    System.out.println("A - All");
+                    System.out.println("D - Deposits");
+                    System.out.println("P - Payments");
+                    System.out.print("Choose option: ");
+                    String ledgerOption = scanner.nextLine();
+                    ledger.displayLedger(ledgerOption);
                     break;
                 case "R":
                     reports.runReportMenu(scanner);

@@ -20,7 +20,7 @@ public class Ledger {
 
     public void loadTransactions() {
         try {
-            createFileIfNotExists(); // Create the file if it doesn't exist
+            createFileIfNotExists();
             BufferedReader reader = new BufferedReader(new FileReader(Transaction.FILENAME));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -54,15 +54,47 @@ public class Ledger {
         Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed());
     }
 
-    public void displayLedger() {
+    public void displayLedger(String option) {
         System.out.println("Ledger Screen");
-        System.out.println("Date       Time     Description       Vendor       Amount");
-        System.out.println("-------------------------------------------------------");
-        for (Transaction transaction : transactions) {
-            System.out.printf("%-10s%-8s%-20s%-12s%.2f%n",
+        System.out.printf("%-11s%-8s%-24s%-18s%-10s%n", "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-----------------------------------------------------------");
+
+        ArrayList<Transaction> displayTransactions = new ArrayList<>();
+
+        switch (option.toUpperCase()) {
+            case "A":
+                displayTransactions.addAll(transactions);
+                break;
+            case "D":
+                for (Transaction transaction : transactions) {
+                    if (transaction.getAmount() > 0) {
+                        displayTransactions.add(transaction);
+                    }
+                }
+                break;
+            case "P":
+                for (Transaction transaction : transactions) {
+                    if (transaction.getAmount() < 0) {
+                        displayTransactions.add(transaction);
+                    }
+                }
+                break;
+            default:
+                System.out.println("Invalid option. Displaying all entries.");
+                displayTransactions.addAll(transactions);
+        }
+
+        Collections.sort(displayTransactions, Comparator.comparing(Transaction::getDate).reversed());
+
+        for (Transaction transaction : displayTransactions) {
+            String amountString = transaction.getAmount() >= 0 ?
+                    String.format("$%.2f", transaction.getAmount()) :
+                    String.format("-$%.2f", Math.abs(transaction.getAmount())); // Add dollar sign and handle negative amounts
+
+            System.out.printf("%-11s%-8s%-24s%-18s%-10s%n",
                     transaction.getDate(), transaction.getTime(),
                     transaction.getDescription(), transaction.getVendor(),
-                    transaction.getAmount());
+                    amountString);
         }
     }
 

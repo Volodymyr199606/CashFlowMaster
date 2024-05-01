@@ -12,14 +12,15 @@ public class Reports {
 
     public void runReportMenu(Scanner scanner) {
         while (true) {
+            System.out.println();
             System.out.println("REPORTS SCREEN");
-            System.out.println("1) Month to Date");
-            System.out.println("2) Previous Month");
-            System.out.println("3) Year To Date");
-            System.out.println("4) Previous Year");
-            System.out.println("5) Search by Vendor");
-            System.out.println("0) Back");
-            System.out.println("H) Home");
+            System.out.println("1 - Month to Date");
+            System.out.println("2 - Previous Month");
+            System.out.println("3 - Year To Date");
+            System.out.println("4 - Previous Year");
+            System.out.println("5 - Search by Vendor");
+            System.out.println("0 - Back");
+            System.out.println("H - Home");
             System.out.print("Choose option: ");
 
             String choice = scanner.nextLine();
@@ -54,7 +55,7 @@ public class Reports {
     private void generateMonthToDateReport() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1; // Month is zero-based
+        int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         String startDate = String.format("%04d-%02d-01", year, month);
@@ -68,7 +69,7 @@ public class Reports {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -1);
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1; // Month is zero-based
+        int month = calendar.get(Calendar.MONTH) + 1;
 
         String startDate = String.format("%04d-%02d-01", year, month);
         String endDate = String.format("%04d-%02d-%02d", year, month, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
@@ -80,7 +81,7 @@ public class Reports {
     private void generateYearToDateReport() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH) + 1; // Month is zero-based
+        int month = calendar.get(Calendar.MONTH) + 1;
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         String startDate = String.format("%04d-01-01", year);
@@ -117,6 +118,7 @@ public class Reports {
         System.out.print("Enter vendor name: ");
         String vendor = scanner.nextLine();
         System.out.println("Transactions for Vendor: " + vendor);
+        System.out.println();
 
         for (Transaction transaction : ledger.getTransactions()) {
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {
