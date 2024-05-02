@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 public class Transaction {
-    public static final String FILENAME = "Files/transactionHistory.csv";
+    public static final String FILENAME = "C:\\Pluralsight\\LearnToCode_Capstones\\CashFlowMaster\\AccountingLedgerApplication\\Files\\transactionHistory.csv";
 
     private final String  date;
     private final String time;
