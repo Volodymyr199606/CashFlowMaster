@@ -173,7 +173,11 @@ public class Reports {
         String amountString = scanner.nextLine();
         Double amount = amountString.isEmpty() ? null : Double.parseDouble(amountString);
 
-        
+        if (startDate.isEmpty() && endDate.isEmpty() && description.isEmpty() && vendor.isEmpty() && amountString.isEmpty()) {
+            System.out.println();
+            System.out.println(orange + "You did not choose anything, please enter at least one search criteria."+ reset);
+            return;
+        }
 
         System.out.println(orange + "Custom Search Results:" + reset);
         System.out.println();
