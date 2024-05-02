@@ -20,6 +20,7 @@ public class Reports {
             System.out.println("│ 3 - Year To Date      │");
             System.out.println("│ 4 - Previous Year     │");
             System.out.println("│ 5 - Search by Vendor  │");
+            System.out.println("│ 6 - Custom Search     │");
             System.out.println("│ 0 - Back              │");
             System.out.println("│ H - Home              │");
             System.out.println("└───────────────────────┘");
@@ -43,6 +44,9 @@ public class Reports {
                     break;
                 case "5":
                     searchByVendor(scanner);
+                    break;
+                case "6":
+                    customSearch(scanner);
                     break;
                 case "0":
                     return;
@@ -142,7 +146,43 @@ public class Reports {
                         transaction.getDate(), transaction.getTime(),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
+
+
             }
         }
     }
+    private void customSearch(Scanner scanner) {
+        System.out.print("Enter start date (yyyy-mm-dd) or leave blank: ");
+        String startDate = scanner.nextLine();
+        System.out.print("Enter end date (yyyy-mm-dd) or leave blank: ");
+        String endDate = scanner.nextLine();
+        System.out.print("Enter description or leave blank: ");
+        String description = scanner.nextLine();
+        System.out.print("Enter vendor or leave blank: ");
+        String vendor = scanner.nextLine();
+        System.out.print("Enter amount or leave blank: ");
+        String amountString = scanner.nextLine();
+        Double amount = amountString.isEmpty() ? null : Double.parseDouble(amountString);
+
+        System.out.println("Custom Search Results:");
+        System.out.println();
+        System.out.printf("%-12s%-8s%-20s%-15s%-10s%n",
+                "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("──────────────┬──────┬────────────────────┬───────────────┬──────────");
+
+        for (Transaction transaction : ledger.getTransactions()) {
+            if ((startDate.isEmpty() || transaction.getDate().compareTo(startDate) >= 0) &&
+                    (endDate.isEmpty() || transaction.getDate().compareTo(endDate) <= 0) &&
+                    (description.isEmpty() || transaction.getDescription().equalsIgnoreCase(description)) &&
+                    (vendor.isEmpty() || transaction.getVendor().equalsIgnoreCase(vendor)) &&
+                    (amount == null || transaction.getAmount() == amount)) {
+                System.out.printf("%-12s%-8s%-20s%-15s%.2f%n",
+                        transaction.getDate(), transaction.getTime(),
+                        transaction.getDescription(), transaction.getVendor(),
+                        transaction.getAmount());
+            }
+        }
+    }
+
+
 }

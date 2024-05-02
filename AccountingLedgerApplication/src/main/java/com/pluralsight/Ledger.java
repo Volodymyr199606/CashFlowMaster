@@ -24,7 +24,7 @@ public class Ledger {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
-                if (parts.length >= 5) { // Check if the array has at least 5 elements
+                if (parts.length >= 5) {
                     String date = parts[0];
                     String time = parts[1];
                     String description = parts[2];
