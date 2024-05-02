@@ -119,7 +119,7 @@ public class Reports {
 
         for (Transaction transaction : ledger.getTransactions()) {
             if (transaction.getDate().compareTo(startDate) >= 0 && transaction.getDate().compareTo(endDate) <= 0) {
-                System.out.printf("%-12s%-8s%-20s%-15s%.2f%n",
+                System.out.printf("%-12s%-8s%-20s%-15s$%.2f%n",
                         transaction.getDate(), transaction.getTime(),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
@@ -138,7 +138,7 @@ public class Reports {
 
         for (Transaction transaction : ledger.getTransactions()) {
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {
-                System.out.printf("%-10s%-8s%-20s%-12s%.2f%n",
+                System.out.printf("%-12s%-8s%-20s%-17s$%.2f%n",
                         transaction.getDate(), transaction.getTime(),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
