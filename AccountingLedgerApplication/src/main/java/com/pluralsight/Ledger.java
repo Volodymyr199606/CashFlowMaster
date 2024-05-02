@@ -64,9 +64,9 @@ public class Ledger {
 
         System.out.println();
         System.out.println(lightGreen + "Ledger Screen" + reset);
-        System.out.println("┌───────────┬──────┬────────────────────┬────────────────┬─────────┐  ");
-        System.out.println("│   Date    │ Time │    Description     │    Vendor      │  Amount |  ");
-        System.out.println("├───────────┼──────┼────────────────────┼────────────────┼─────────┤  ");
+        System.out.println("┌───────────┬──────┬────────────────────┬────────────────┬──────────┐  ");
+        System.out.println("│   Date    │ Time │    Description     │    Vendor      │  Amount  |  ");
+        System.out.println("├───────────┼──────┼────────────────────┼────────────────┼──────────┤  ");
 
         ArrayList<Transaction> displayTransactions = new ArrayList<>();
 
@@ -117,7 +117,7 @@ public class Ledger {
                     transaction.getDescription(), transaction.getVendor(),
                     amountString);
         }
-        System.out.println("└───────────┴──────┴────────────────────┴────────────────┴─────────┘");
+        System.out.println("└───────────┴──────┴────────────────────┴────────────────┴──────────┘");
     }
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);

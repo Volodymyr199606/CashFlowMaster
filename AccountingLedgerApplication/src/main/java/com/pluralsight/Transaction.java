@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 public class Transaction {
+
+    String lightGreen = "\033[92m";
+    String reset = "\033[0m";
     public static final String FILENAME = "C:\\Pluralsight\\LearnToCode_Capstones\\CashFlowMaster\\AccountingLedgerApplication\\Files\\transactionHistory.csv";
 
     private final String  date;
@@ -28,7 +31,7 @@ public class Transaction {
             createFileIfNotExists();
             String data = String.format("%s|%s|%s|%s|%.2f%n", date, time, description, vendor, amount);
             Files.write(Paths.get(FILENAME), data.getBytes(), StandardOpenOption.APPEND);
-            System.out.println("Transaction added successfully.");
+            System.out.print(lightGreen  + "Transaction added successfully " + reset);
         } catch (IOException e) {
             System.out.println("Error occurred while writing to file: " + e.getMessage());
         }
