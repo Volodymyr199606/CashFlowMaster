@@ -1,10 +1,10 @@
 # CashFlowMaster
 
-# 🚀 Main Class: The Main class is the entry point of your application. It contains the main method which starts the application. It creates a Scanner object for reading user input, a Ledger object for managing transactions, and a Reports object for generating reports. The main loop of the application displays a menu to the user and waits for their input. Depending on the user's choice, it calls different methods to handle different actions such as adding a deposit, making a payment, displaying the ledger, running reports, or exiting the application.
+# 🚀 Main Class:
+
+The Main class is the entry point of your application. It contains the main method which starts the application. It creates a Scanner object for reading user input, a Ledger object for managing transactions, and a Reports object for generating reports. The main loop of the application displays a menu to the user and waits for their input. Depending on the user's choice, it calls different methods to handle different actions such as adding a deposit, making a payment, displaying the ledger, running reports, or exiting the application.
 
 🕹️ Interesting parts of the Main class is the main loop where the application displays a menu to the user and waits for their input. Depending on the user's choice, it calls different methods to handle different actions. Here's the example:
-
-![UserMenu](images/UserMenu.PNG)
 
 🚀
 
@@ -29,3 +29,5 @@ Here is an action:🔥
 🚀
 
 ![DisplayingDeposits](images/DisplayingDeposits.PNG)
+
+In this code, the addTransaction method adds a new transaction to the ledger, and the displayLedger method displays all transactions, only deposits, or only payments based on the user's choice.
