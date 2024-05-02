@@ -10,21 +10,26 @@ public class Reports {
         this.ledger = ledger;
     }
 
+    String orange = "\033[38;5;208m";
+    String reset = "\033[0m";
+
     public void runReportMenu(Scanner scanner) {
         while (true) {
+
             System.out.println();
-            System.out.printf("%88s%n", "REPORTS SCREEN");
-            System.out.println("┌───────────────────────┐");
-            System.out.println("│ 1 - Month to Date     │");
-            System.out.println("│ 2 - Previous Month    │");
-            System.out.println("│ 3 - Year To Date      │");
-            System.out.println("│ 4 - Previous Year     │");
-            System.out.println("│ 5 - Search by Vendor  │");
-            System.out.println("│ 6 - Custom Search     │");
-            System.out.println("│ 0 - Back              │");
-            System.out.println("│ H - Home              │");
-            System.out.println("└───────────────────────┘");
-            System.out.print("Pick from options: ");
+            System.out.printf(orange + "%88s%n" + reset, "REPORTS SCREEN");
+            System.out.println(orange + "┌───────────────────────┐" + reset);
+            System.out.println(orange + "│ 1 - Month to Date     │" + reset);
+            System.out.println(orange + "│ 2 - Previous Month    │" + reset);
+            System.out.println(orange + "│ 3 - Year To Date      │" + reset);
+            System.out.println(orange + "│ 4 - Previous Year     │" + reset);
+            System.out.println(orange + "│ 5 - Search by Vendor  │" + reset);
+            System.out.println(orange + "│ 6 - Custom Search     │" + reset);
+            System.out.println(orange + "│ 0 - Back              │" + reset);
+            System.out.println(orange + "│ H - Home              │" + reset);
+            System.out.println(orange + "└───────────────────────┘" + reset);
+
+            System.out.print(orange + "Pick from options: " + reset);
 
 
             String choice = scanner.nextLine();
@@ -68,8 +73,8 @@ public class Reports {
         String startDate = String.format("%04d-%02d-01", year, month);
         String endDate = String.format("%04d-%02d-%02d", year, month, day);
 
-
-        System.out.println("Month to Date Report:");
+        System.out.println();
+        System.out.println(orange + "Month to Date Report:" + reset);
         System.out.println();
 
         displayReport(startDate, endDate);
@@ -84,7 +89,8 @@ public class Reports {
         String startDate = String.format("%04d-%02d-01", year, month);
         String endDate = String.format("%04d-%02d-%02d", year, month, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
 
-        System.out.println("Previous Month Report:");
+        System.out.println();
+        System.out.println(orange + "Previous Month Report:" + reset);
         System.out.println();
         displayReport(startDate, endDate);
     }
@@ -98,7 +104,8 @@ public class Reports {
         String startDate = String.format("%04d-01-01", year);
         String endDate = String.format("%04d-%02d-%02d", year, month, day);
 
-        System.out.println("Year to Date Report:");
+        System.out.println();
+        System.out.println(orange + "Year To Date Report:" + reset);
         System.out.println();
         displayReport(startDate, endDate);
     }
@@ -111,7 +118,8 @@ public class Reports {
         String startDate = String.format("%04d-01-01", year);
         String endDate = String.format("%04d-12-31", year);
 
-        System.out.println("Previous Year Report:");
+        System.out.println();
+        System.out.println(orange + "Previous Year Report:" + reset);
         System.out.println();
         displayReport(startDate, endDate);
     }
@@ -132,9 +140,9 @@ public class Reports {
     }
 
     private void searchByVendor(Scanner scanner) {
-        System.out.print("Enter vendor name: ");
+        System.out.print(orange + "Enter vendor name:" + reset);
         String vendor = scanner.nextLine();
-        System.out.println("Transactions for Vendor: " + vendor);
+        System.out.println(orange + "Transactions for Vendor: " + vendor + reset);
         System.out.println();
         System.out.printf("%-12s%-8s%-20s%-15s%-10s%n",
                 "Date", "Time", "Description", "Vendor", "Amount");
@@ -152,19 +160,19 @@ public class Reports {
         }
     }
     private void customSearch(Scanner scanner) {
-        System.out.print("Enter start date (yyyy-mm-dd) or leave blank: ");
+        System.out.print(orange + "Enter start date (yyyy-mm-dd) or leave blank: " + reset);
         String startDate = scanner.nextLine();
-        System.out.print("Enter end date (yyyy-mm-dd) or leave blank: ");
+        System.out.print(orange + "Enter end date (yyyy-mm-dd) or leave blank: " + reset);
         String endDate = scanner.nextLine();
-        System.out.print("Enter description or leave blank: ");
+        System.out.print(orange + "Enter description or leave blank: " + reset);
         String description = scanner.nextLine();
-        System.out.print("Enter vendor or leave blank: ");
+        System.out.print(orange + "Enter vendor or leave blank: " + reset);
         String vendor = scanner.nextLine();
-        System.out.print("Enter amount or leave blank: ");
+        System.out.print(orange + "Enter amount or leave blank: " + reset);
         String amountString = scanner.nextLine();
         Double amount = amountString.isEmpty() ? null : Double.parseDouble(amountString);
 
-        System.out.println("Custom Search Results:");
+        System.out.println(orange + "Custom Search Results:" + reset);
         System.out.println();
         System.out.printf("%-12s%-8s%-20s%-15s%-10s%n",
                 "Date", "Time", "Description", "Vendor", "Amount");

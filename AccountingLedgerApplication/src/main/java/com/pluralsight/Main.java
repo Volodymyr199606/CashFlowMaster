@@ -8,18 +8,23 @@ public class Main {
         Ledger ledger = new Ledger();
         Reports reports = new Reports(ledger);
 
+        String lightGreen = "\033[92m";
+        String reset = "\033[0m";
+
         while (true) {
             System.out.println();
-            System.out.printf("%95s%n", "WELCOME TO THE HOME SCREEN");
+            System.out.printf(lightGreen + "%95s%n" + reset, "WELCOME TO THE HOME SCREEN");
             System.out.println();
-            System.out.println("┌───────────────────────────┐");
-            System.out.println("│ D - Add deposit           │");
-            System.out.println("│ P - Make payment          │");
-            System.out.println("│ L - Ledger                │");
-            System.out.println("│ R - Reports               │");
-            System.out.println("│ X - Exit                  │");
-            System.out.println("└───────────────────────────┘");
-            System.out.print("Pick option: ");
+
+
+            System.out.println(lightGreen  + "┌───────────────────────────┐" + reset);
+            System.out.println(lightGreen  + "│ D - Add deposit           │" + reset);
+            System.out.println(lightGreen  + "│ P - Make payment          │" + reset);
+            System.out.println(lightGreen  + "│ L - Ledger                │" + reset);
+            System.out.println(lightGreen  + "│ R - Reports               │" + reset);
+            System.out.println(lightGreen  + "│ X - Exit                  │" + reset);
+            System.out.println(lightGreen  + "└───────────────────────────┘" + reset);
+            System.out.print(lightGreen + "Pick option: " + reset);
 
             String choice = scanner.nextLine();
 
@@ -31,12 +36,12 @@ public class Main {
                     makePayment(scanner, ledger);
                     break;
                 case "L":
-                    System.out.println("┌──────────────┐ ");
-                    System.out.println("│ A - All      │ ");
-                    System.out.println("│ D - Deposits │ ");
-                    System.out.println("│ P - Payments │ ");
-                    System.out.println("└──────────────┘ ");
-                    System.out.print("Make a selection: ");
+                    System.out.println(lightGreen  + "┌──────────────┐ " + reset);
+                    System.out.println(lightGreen  + "│ A - All      │ " + reset);
+                    System.out.println(lightGreen  + "│ D - Deposits │ " + reset);
+                    System.out.println(lightGreen +  "│ P - Payments │ " + reset);
+                    System.out.println(lightGreen  + "└──────────────┘ " + reset);
+                    System.out.print(lightGreen  + "Make a selection: " + reset);
 
                     String ledgerOption = scanner.nextLine();
                     ledger.displayLedger(ledgerOption);
@@ -54,16 +59,20 @@ public class Main {
     }
 
     public static void addDeposit(Scanner scanner, Ledger ledger) {
-        System.out.println("Enter deposit information:");
-        System.out.print("Date (yyyy-mm-dd): ");
+
+        String lightGreen = "\033[92m";
+        String reset = "\033[0m";
+
+        System.out.println(lightGreen + "Enter deposit information:" + reset);
+        System.out.print(lightGreen + "Date (yyyy-mm-dd): " + reset);
         String date = scanner.nextLine();
-        System.out.print("Time (hh:mm): ");
+        System.out.print(lightGreen + "Time (hh:mm): " + reset);
         String time = scanner.nextLine();
-        System.out.print("Description: ");
+        System.out.print(lightGreen + "Description: " + reset);
         String description = scanner.nextLine();
-        System.out.print("Vendor: ");
+        System.out.print(lightGreen + "Vendor: " + reset);
         String vendor = scanner.nextLine();
-        System.out.print("Amount: ");
+        System.out.print(lightGreen + "Amount: " + reset);
         double amount = Double.parseDouble(scanner.nextLine());
 
         Transaction deposit = new Transaction(date, time, description, vendor, amount);
@@ -72,16 +81,20 @@ public class Main {
     }
 
     public static void makePayment(Scanner scanner, Ledger ledger) {
-        System.out.println("Enter payment information:");
-        System.out.print("Date (yyyy-mm-dd): ");
+
+        String lightGreen = "\033[92m";
+        String reset = "\033[0m";
+
+        System.out.println(lightGreen + "Enter payment information:" + reset);
+        System.out.print(lightGreen + "Date (yyyy-mm-dd): " + reset);
         String date = scanner.nextLine();
-        System.out.print("Time (hh:mm): ");
+        System.out.print(lightGreen + "Time (hh:mm): " + reset);
         String time = scanner.nextLine();
-        System.out.print("Description: ");
+        System.out.print(lightGreen + "Description: " + reset);
         String description = scanner.nextLine();
-        System.out.print("Vendor: ");
+        System.out.print(lightGreen + "Vendor: " + reset);
         String vendor = scanner.nextLine();
-        System.out.print("Amount: ");
+        System.out.print(lightGreen + "Amount: " + reset);
         double amount = Double.parseDouble(scanner.nextLine());
 
         Transaction payment = new Transaction(date, time, description, vendor, -amount);

@@ -58,7 +58,12 @@ public class Ledger {
 
 
     public void displayLedger(String option) {
-        System.out.println("Ledger Screen");
+
+        String lightGreen = "\033[92m";
+        String reset = "\033[0m";
+
+        System.out.println();
+        System.out.println(lightGreen + "Ledger Screen" + reset);
         System.out.println("┌───────────┬──────┬────────────────────┬────────────────┬─────────┐  ");
         System.out.println("│   Date    │ Time │    Description     │    Vendor      │  Amount |  ");
         System.out.println("├───────────┼──────┼────────────────────┼────────────────┼─────────┤  ");
