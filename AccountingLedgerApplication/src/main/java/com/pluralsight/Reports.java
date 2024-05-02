@@ -64,8 +64,10 @@ public class Reports {
         String startDate = String.format("%04d-%02d-01", year, month);
         String endDate = String.format("%04d-%02d-%02d", year, month, day);
 
-        System.out.println();
+
         System.out.println("Month to Date Report:");
+        System.out.println();
+
         displayReport(startDate, endDate);
     }
 
@@ -130,6 +132,9 @@ public class Reports {
         String vendor = scanner.nextLine();
         System.out.println("Transactions for Vendor: " + vendor);
         System.out.println();
+        System.out.printf("%-12s%-8s%-20s%-15s%-10s%n",
+                "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("──────────────┬──────┬────────────────────┬───────────────┬──────────");
 
         for (Transaction transaction : ledger.getTransactions()) {
             if (transaction.getVendor().equalsIgnoreCase(vendor)) {

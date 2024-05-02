@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 public class Ledger {
-    private ArrayList<Transaction> transactions;
+    private final ArrayList<Transaction> transactions;
 
     public Ledger() {
         transactions = new ArrayList<>();
@@ -53,14 +53,16 @@ public class Ledger {
     }
 
     public void sortTransactions() {
-        Collections.sort(transactions, Comparator.comparing(Transaction::getDate).reversed());
+        transactions.sort(Comparator.comparing(Transaction::getDate).reversed());
     }
+
+
 
     public void displayLedger(String option) {
         System.out.println("Ledger Screen");
-        System.out.println("┌──────────┬──────┬─────────────────────────────────────────┬────────────────┬─────────┐  ");
-        System.out.println("│   Date   │ Time │    Description                          │      Vendor    │  Amount |  ");
-        System.out.println("├──────────┼──────┼─────────────────────────────────────────┼────────────────┼─────────┤  ");
+        System.out.println("┌───────────┬──────┬────────────────────┬────────────────┬─────────┐  ");
+        System.out.println("│   Date    │ Time │    Description     │    Vendor      │  Amount |  ");
+        System.out.println("├───────────┼──────┼────────────────────┼────────────────┼─────────┤  ");
 
         ArrayList<Transaction> displayTransactions = new ArrayList<>();
 
@@ -87,31 +89,31 @@ public class Ledger {
                 displayTransactions.addAll(transactions);
         }
 
-        Collections.sort(displayTransactions, Comparator.comparing(Transaction::getDate).reversed());
+        displayTransactions.sort(Comparator.comparing(Transaction::getDate).reversed());
 
-        // Calculate column widths dynamically
-        int[] columnWidths = new int[]{10, 6, 20, 16, 9}; // Initial widths
+
+        int[] columnWidths = new int[]{10, 6, 20, 16, 9};
         for (Transaction transaction : displayTransactions) {
             columnWidths[0] = Math.max(columnWidths[0], transaction.getDate().length());
             columnWidths[1] = Math.max(columnWidths[1], transaction.getTime().length());
             columnWidths[2] = Math.max(columnWidths[2], transaction.getDescription().length());
             columnWidths[3] = Math.max(columnWidths[3], transaction.getVendor().length());
             String amountString = String.format("%.2f", Math.abs(transaction.getAmount()));
-            columnWidths[4] = Math.max(columnWidths[4], amountString.length() + 3); // Add 3 for dollar sign and decimals
+            columnWidths[4] = Math.max(columnWidths[4], amountString.length() + 3);
         }
 
-        // Print each transaction with aligned columns
+
         for (Transaction transaction : displayTransactions) {
             String amountString = transaction.getAmount() >= 0 ?
                     String.format("$%.2f", transaction.getAmount()) :
-                    String.format("-$%.2f", Math.abs(transaction.getAmount())); // Add dollar sign and handle negative amounts
+                    String.format("-$%.2f", Math.abs(transaction.getAmount()));
 
             System.out.printf("│%-"+columnWidths[0]+"s│%-"+columnWidths[1]+"s│%-"+columnWidths[2]+"s│%-"+columnWidths[3]+"s│%-"+columnWidths[4]+"s│%n",
                     transaction.getDate(), transaction.getTime(),
                     transaction.getDescription(), transaction.getVendor(),
                     amountString);
         }
-        System.out.println("└──────────┴──────┴─────────────────────────────────────────┴────────────────┴─────────┘");
+        System.out.println("└───────────┴──────┴────────────────────┴────────────────┴─────────┘");
     }
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);

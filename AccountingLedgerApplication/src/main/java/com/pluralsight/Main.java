@@ -13,11 +13,11 @@ public class Main {
             System.out.printf("%95s%n", "WELCOME TO THE HOME SCREEN");
             System.out.println();
             System.out.println("┌───────────────────────────┐");
-            System.out.println("| D - Add deposit           |");
-            System.out.println("| P - Make payment          |");
-            System.out.println("| L - Ledger                |");
-            System.out.println("| R - Reports               |");
-            System.out.println("| X - Exit                  |");
+            System.out.println("│ D - Add deposit           │");
+            System.out.println("│ P - Make payment          │");
+            System.out.println("│ L - Ledger                │");
+            System.out.println("│ R - Reports               │");
+            System.out.println("│ X - Exit                  │");
             System.out.println("└───────────────────────────┘");
             System.out.print("Pick option: ");
 
@@ -84,7 +84,7 @@ public class Main {
         System.out.print("Amount: ");
         double amount = Double.parseDouble(scanner.nextLine());
 
-        Transaction payment = new Transaction(date, time, description, vendor, -amount); // Negative amount for payments
+        Transaction payment = new Transaction(date, time, description, vendor, -amount);
         payment.writeToTransactionFile();
         ledger.addTransaction(payment);
     }
