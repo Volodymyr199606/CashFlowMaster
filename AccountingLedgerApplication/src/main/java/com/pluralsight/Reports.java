@@ -18,6 +18,7 @@ public class Reports {
 
             System.out.println();
             System.out.printf(orange + "%88s%n" + reset, "REPORTS SCREEN");
+            System.out.println();
             System.out.println(orange + "┌───────────────────────┐" + reset);
             System.out.println(orange + "│ 1 - Month to Date     │" + reset);
             System.out.println(orange + "│ 2 - Previous Month    │" + reset);
@@ -56,10 +57,10 @@ public class Reports {
                 case "0":
                     return;
                 case "H":
-                    System.out.println("Going back to Home Screen...");
+                    System.out.println(orange + "Going back to Home Screen..." + reset);
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(orange + "Invalid choice. Please try again." + reset);
             }
         }
     }
@@ -171,6 +172,12 @@ public class Reports {
         System.out.print(orange + "Enter amount or leave blank: " + reset);
         String amountString = scanner.nextLine();
         Double amount = amountString.isEmpty() ? null : Double.parseDouble(amountString);
+
+        if (startDate.isEmpty() && endDate.isEmpty() && description.isEmpty() && vendor.isEmpty() && amountString.isEmpty()) {
+            System.out.println();
+            System.out.println(orange + "You did not choose anything, please enter at least one search criteria."+ reset);
+            return;
+        }
 
         System.out.println(orange + "Custom Search Results:" + reset);
         System.out.println();

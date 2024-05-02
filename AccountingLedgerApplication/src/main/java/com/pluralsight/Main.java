@@ -50,7 +50,7 @@ public class Main {
                     reports.runReportMenu(scanner);
                     break;
                 case "X":
-                    System.out.println("Exiting...");
+                    System.out.println(lightGreen + "Exiting..." + reset);
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
