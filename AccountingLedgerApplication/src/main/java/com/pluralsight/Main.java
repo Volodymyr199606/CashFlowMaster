@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+
+
+
         Scanner scanner = new Scanner(System.in);
         Ledger ledger = new Ledger();
         Reports reports = new Reports(ledger);
@@ -13,7 +17,7 @@ public class Main {
 
         while (true) {
             System.out.println();
-            System.out.printf(lightGreen + "%95s%n" + reset, "WELCOME TO THE HOME SCREEN");
+            System.out.printf(lightGreen + "%95s%n" + reset, "WELCOME TO THE HOME SCREEN!");
             System.out.println();
 
 
@@ -59,6 +63,11 @@ public class Main {
     }
 
     public static void addDeposit(Scanner scanner, Ledger ledger) {
+
+
+
+
+
 
         String lightGreen = "\033[92m";
         String reset = "\033[0m";

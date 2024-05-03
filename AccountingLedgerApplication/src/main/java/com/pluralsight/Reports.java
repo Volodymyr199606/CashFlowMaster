@@ -1,5 +1,4 @@
 package com.pluralsight;
-
 import java.util.Calendar;
 import java.util.Scanner;
 
@@ -17,7 +16,7 @@ public class Reports {
         while (true) {
 
             System.out.println();
-            System.out.printf(orange + "%88s%n" + reset, "REPORTS SCREEN");
+            System.out.printf(orange + "%88s%n" + reset, "WELCOME TO THE REPORTS SCREEN!");
             System.out.println();
             System.out.println(orange + "┌───────────────────────┐" + reset);
             System.out.println(orange + "│ 1 - Month to Date     │" + reset);

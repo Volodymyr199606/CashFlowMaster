@@ -44,6 +44,11 @@ public class Transaction {
         }
     }
 
+
+
+
+
+
     public String getDate() {
         return date;
     }

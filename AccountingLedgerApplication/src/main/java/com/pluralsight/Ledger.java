@@ -1,5 +1,4 @@
 package com.pluralsight;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -52,10 +51,15 @@ public class Ledger {
     }
 
     public void sortTransactions() {
-        transactions.sort(Comparator.comparing(Transaction::getDate).reversed());
+        transactions.sort((t1, t2) -> {
+            int dateComparison = t2.getDate().compareTo(t1.getDate());
+            if (dateComparison == 0) {
+                return t2.getTime().compareTo(t1.getTime());
+            } else {
+                return dateComparison;
+            }
+        });
     }
-
-
 
     public void displayLedger(String option) {
 
