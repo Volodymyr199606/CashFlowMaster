@@ -59,7 +59,8 @@ public class Main {
                     System.out.println(lightGreen + "Exiting..." + reset);
                     return;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println(lightGreen  + "Invalid choice. Please try again." + reset);
+
             }
         }
     }
@@ -67,13 +68,16 @@ public class Main {
     // Method to add a deposit transaction
     public static void addDeposit(Scanner scanner, Ledger ledger) {
 
-
         String lightGreen = "\033[92m";
         String reset = "\033[0m";
 
         System.out.println(lightGreen + "Enter deposit information:" + reset);
         System.out.print(lightGreen + "Date (yyyy-mm-dd): " + reset);
         String date = scanner.nextLine();
+        if (date.isEmpty()) {
+            System.out.println(lightGreen + "Warning: Field is empty! Please enter a correct data." + reset);
+            return;
+        }
         System.out.print(lightGreen + "Time (hh:mm): " + reset);
         String time = scanner.nextLine();
         System.out.print(lightGreen + "Description: " + reset);
@@ -82,6 +86,7 @@ public class Main {
         String vendor = scanner.nextLine();
         System.out.print(lightGreen + "Amount: " + reset);
         double amount = Double.parseDouble(scanner.nextLine());
+
 
         Transaction deposit = new Transaction(date, time, description, vendor, amount);
         deposit.writeToTransactionFile();
@@ -97,6 +102,10 @@ public class Main {
         System.out.println(lightGreen + "Enter payment information:" + reset);
         System.out.print(lightGreen + "Date (yyyy-mm-dd): " + reset);
         String date = scanner.nextLine();
+        if (date.isEmpty()) {
+            System.out.println(lightGreen + "Warning: Field is empty! Please enter a correct data." + reset);
+            return;
+        }
         System.out.print(lightGreen + "Time (hh:mm): " + reset);
         String time = scanner.nextLine();
         System.out.print(lightGreen + "Description: " + reset);

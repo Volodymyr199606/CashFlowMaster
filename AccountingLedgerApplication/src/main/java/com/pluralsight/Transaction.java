@@ -25,6 +25,7 @@ public class Transaction {
 
     // Constructor to initialize a transaction
     public Transaction(String date, String time, String description, String vendor, double amount) {
+
         this.date = date;
         this.time = time;
         this.description = description;
@@ -53,9 +54,7 @@ public class Transaction {
     }
 
 
-
-
-
+    // Getters for transaction details
 
     public String getDate() {
         return date;
