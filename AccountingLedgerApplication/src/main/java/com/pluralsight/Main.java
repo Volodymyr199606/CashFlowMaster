@@ -12,9 +12,11 @@ public class Main {
         Ledger ledger = new Ledger();
         Reports reports = new Reports(ledger);
 
+        // Define color codes for console output
         String lightGreen = "\033[92m";
         String reset = "\033[0m";
 
+        // Main loop of the application
         while (true) {
             System.out.println();
             System.out.printf(lightGreen + "%95s%n" + reset, "WELCOME TO THE HOME SCREEN!");
@@ -62,11 +64,8 @@ public class Main {
         }
     }
 
+    // Method to add a deposit transaction
     public static void addDeposit(Scanner scanner, Ledger ledger) {
-
-
-
-
 
 
         String lightGreen = "\033[92m";
@@ -89,6 +88,7 @@ public class Main {
         ledger.addTransaction(deposit);
     }
 
+    // Method to make a payment transaction
     public static void makePayment(Scanner scanner, Ledger ledger) {
 
         String lightGreen = "\033[92m";

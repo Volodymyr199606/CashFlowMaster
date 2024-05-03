@@ -2,9 +2,13 @@ package com.pluralsight;
 import java.util.Calendar;
 import java.util.Scanner;
 
+// Reports class to generate various types of reports
 public class Reports {
+
+    // Ledger instance to access transactions
     public Ledger ledger;
 
+    // Constructor to initialize the ledger
     public Reports(Ledger ledger) {
         this.ledger = ledger;
     }
@@ -12,6 +16,8 @@ public class Reports {
     String orange = "\033[38;5;208m";
     String reset = "\033[0m";
 
+
+    // Method to run the report menu
     public void runReportMenu(Scanner scanner) {
         while (true) {
 
@@ -34,6 +40,7 @@ public class Reports {
 
             String choice = scanner.nextLine();
 
+            // Switch case to handle user choice
             switch (choice.toUpperCase()) {
                 case "1":
                     generateMonthToDateReport();
@@ -64,6 +71,7 @@ public class Reports {
         }
     }
 
+    // Method to generate a report for the current month to date
     private void generateMonthToDateReport() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -80,6 +88,7 @@ public class Reports {
         displayReport(startDate, endDate);
     }
 
+    // Method to generate a report for the previous month
     private void generatePreviousMonthReport() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, -1);
@@ -95,6 +104,7 @@ public class Reports {
         displayReport(startDate, endDate);
     }
 
+    // Method to generate a report for the current year to date
     private void generateYearToDateReport() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
@@ -110,6 +120,7 @@ public class Reports {
         displayReport(startDate, endDate);
     }
 
+    // Method to generate a report for the previous year
     private void generatePreviousYearReport() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.YEAR, -1);
@@ -124,6 +135,7 @@ public class Reports {
         displayReport(startDate, endDate);
     }
 
+    // Method to display a report within a given date range
     private void displayReport(String startDate, String endDate) {
         System.out.printf("%-12s%-8s%-20s%-15s%-10s%n",
                 "Date", "Time", "Description", "Vendor", "Amount");
@@ -139,6 +151,7 @@ public class Reports {
         }
     }
 
+    // Method to search transactions by vendor
     private void searchByVendor(Scanner scanner) {
         System.out.print(orange + "Enter vendor name:" + reset);
         String vendor = scanner.nextLine();
@@ -159,6 +172,8 @@ public class Reports {
             }
         }
     }
+
+    // Method to perform a custom search
     private void customSearch(Scanner scanner) {
         System.out.print(orange + "Enter start date (yyyy-mm-dd) or leave blank: " + reset);
         String startDate = scanner.nextLine();

@@ -6,18 +6,24 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+
+// Transaction class to represent a single transaction
 public class Transaction {
 
     String lightGreen = "\033[92m";
     String reset = "\033[0m";
+
+    // File path for storing transactions
     public static final String FILENAME = "C:\\Pluralsight\\LearnToCode_Capstones\\CashFlowMaster\\AccountingLedgerApplication\\Files\\transactionHistory.csv";
 
+    // Transaction details
     private final String  date;
     private final String time;
     private final String description;
     private final String vendor;
     private final double amount;
 
+    // Constructor to initialize a transaction
     public Transaction(String date, String time, String description, String vendor, double amount) {
         this.date = date;
         this.time = time;
@@ -26,6 +32,7 @@ public class Transaction {
         this.amount = amount;
     }
 
+    // Method to write the transaction to a file
     public void writeToTransactionFile() {
         try {
             createFileIfNotExists();
@@ -37,6 +44,7 @@ public class Transaction {
         }
     }
 
+    // Method to create a file if it does not exist
     public void createFileIfNotExists() throws IOException {
         Path path = Paths.get(FILENAME);
         if (!Files.exists(path)) {

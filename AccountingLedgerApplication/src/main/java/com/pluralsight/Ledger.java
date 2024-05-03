@@ -8,19 +8,24 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+// Ledger class to manage transactions
 public class Ledger {
     private final ArrayList<Transaction> transactions;
 
+    // Constructor to initialize the transactions list and load transactions from file
     public Ledger() {
         transactions = new ArrayList<>();
         loadTransactions();
     }
 
+    // Method to load transactions from file
     public void loadTransactions() {
         try {
             createFileIfNotExists();
             BufferedReader reader = new BufferedReader(new FileReader(Transaction.FILENAME));
             String line;
+
+            // Read each line from the file and create a transaction object
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\\|");
                 if (parts.length >= 5) {
@@ -33,12 +38,15 @@ public class Ledger {
                 }
             }
             reader.close();
+
+            // Sort transactions after loading
             sortTransactions();
         } catch (IOException | NumberFormatException e) {
             System.out.println("Error occurred while reading from file: " + e.getMessage());
         }
     }
 
+    // Method to create a file if it does not exist
     private void createFileIfNotExists() {
         Path path = Paths.get(Transaction.FILENAME);
         if (!Files.exists(path)) {
@@ -50,6 +58,7 @@ public class Ledger {
         }
     }
 
+    // Method to sort transactions by date and time
     public void sortTransactions() {
         transactions.sort((t1, t2) -> {
             int dateComparison = t2.getDate().compareTo(t1.getDate());
@@ -61,6 +70,7 @@ public class Ledger {
         });
     }
 
+    // Method to display ledger based on user's choice
     public void displayLedger(String option) {
 
         String lightGreen = "\033[92m";
@@ -123,11 +133,14 @@ public class Ledger {
         }
         System.out.println("└───────────┴──────┴────────────────────┴────────────────┴──────────┘");
     }
+
+    // Method to add a transaction to the ledger
     public void addTransaction(Transaction transaction) {
         transactions.add(transaction);
         sortTransactions();
     }
 
+    // Method to get all transactions
     public ArrayList<Transaction> getTransactions() {
         return transactions;
     }
