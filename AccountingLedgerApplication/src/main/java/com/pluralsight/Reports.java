@@ -205,7 +205,7 @@ public class Reports {
                     (description.isEmpty() || transaction.getDescription().equalsIgnoreCase(description)) &&
                     (vendor.isEmpty() || transaction.getVendor().equalsIgnoreCase(vendor)) &&
                     (amount == null || transaction.getAmount() == amount)) {
-                System.out.printf("%-12s%-8s%-20s%-15s%.2f%n",
+                System.out.printf("%-12s%-8s%-20s%-15s$%.2f%n",
                         transaction.getDate(), transaction.getTime(),
                         transaction.getDescription(), transaction.getVendor(),
                         transaction.getAmount());
