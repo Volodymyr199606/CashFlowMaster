@@ -1,4 +1,4 @@
-# CashFlowMaster
+# CashFlowMaster/Accounting Ledger Application
 
 # 🚀 Main Class
 
